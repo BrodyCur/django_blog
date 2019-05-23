@@ -9,3 +9,6 @@ def home_page(request):
     }
   response = render(request, 'index.html', context)
   return HttpResponse(response)
+
+def root(request):
+  return HttpResponseRedirect('home/')
