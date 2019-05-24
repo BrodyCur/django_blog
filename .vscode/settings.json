@@ -1,0 +1,5 @@
+{
+  "python.pythonPath": "/Users/brodycurrie/.pyenv/versions/blog/bin/python",
+  "python.linting.enabled": true,
+  "python.linting.pylintEnabled": true
+}
