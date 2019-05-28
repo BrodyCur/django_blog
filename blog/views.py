@@ -24,4 +24,4 @@ def article_page(request, id):
   return HttpResponse(response)
 
 def root(request):
-  return HttpResponseRedirect('home/')
+  return HttpResponseRedirect('home')

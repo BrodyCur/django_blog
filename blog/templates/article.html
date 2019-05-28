@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<body>
+<main class="article-content">
   <h2>{{ article.title }}</h2>
-  <h3>{{ article.author }}</h3>
-  <p>{{ article.published_date }}</p>
-  <p>{{ article.body }}</p>
-</body>
+  <div class="sub-head-wrapper">
+    <h4>By: {{ article.author }}</h4>
+    <p class="article-date">{{ article.published_date }}</p>
+  </div>
+  <p class="article-body">{{ article.body }}</p>
+  <a class="return" href="{% url 'home' %}">Back to articles</a>
+</main>
 {% endblock %}

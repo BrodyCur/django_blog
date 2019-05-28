@@ -2,22 +2,26 @@
 
 {% block content %}
 <body>
-  <h2>Welcome!</h2>
-  <h3>{{ date }}</h3>
-  <ul>
-    {% for article in articles %}
+  <header class="home-header">
+    <h2 class="home-title">Welcome!</h2>
+    <h3 class="site-date">{{ date }}</h3>
+  </header>
+  <main class="home-content">
+    <ul>
+      {% for article in articles %}
       <li>
         <a href="{% url 'article_details' id=article.pk %}">
           <h1>{{ article.title }}</h1>
         </a>
+        <p>By: {{ article.author }}</p>
         <p>
-          Topics: 
           {% for topic in article.topic.all %}
-            {{ topic.category }} |
+          {{ topic.category }} |
           {% endfor %}
         </p>
       </li>
-    {% endfor %}
-  </ul>
+      {% endfor %}
+    </ul>
+  </main>
 </body>
 {% endblock %}
