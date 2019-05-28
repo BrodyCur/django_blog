@@ -13,10 +13,9 @@
   <ul>
     {% for article in articles %}
       <li>
-        <h1>{{ article.title }}</h1>
-        <h3>{{ article.author }}</h3>
-        <h6>{{ article.published_date }}</h6>
-        <p>{{ article.body }}</p>
+        <a href="{% url 'article_details' id=article.pk %}">
+          <h1>{{ article.title }}</h1>
+        </a>
         <p>
           Topics: 
           {% for topic in article.topic.all %}
