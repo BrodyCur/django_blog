@@ -8,6 +8,36 @@
     <p class="article-date">{{ article.published_date }}</p>
   </div>
   <p class="article-body">{{ article.body }}</p>
+  
+  <div class="comments-wrapper">
+    <h5>Comments:</h5>
+    <ul>
+      {% for comment in article.comments.all %}
+      <li>{{ comment.name }}:<br>{{ comment.message }} - {{ comment.created_at }}<br><br></li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <form class="comment-form" action="{% url 'create_comment' %}" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="article" value="{{ article.pk }}">
+
+    <div class="name-field">
+      <label for="name">Name:</label>
+      <input id="name" type="text" name='name'>
+    </div>
+
+    <div class="comment-field">
+      <label for="message">Comment:</label>
+      <textarea name="message" id="message" cols="15" rows="3"></textarea>
+    </div>
+
+    <input class="submit-comment-button" type="submit" value="Post Comment">
+
+    <input type="hidden" name="date" value="{{ comment.created_at }}">
+
+  </form>
+  
   <a class="return" href="{% url 'home' %}">Back to articles</a>
 </main>
 {% endblock %}
