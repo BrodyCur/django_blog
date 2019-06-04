@@ -2,11 +2,15 @@ from django import forms
 from blog.models import Comment, Article
 from django.utils import timezone
 
+class LoginForm(forms.Form):
+  username = forms.CharField(label="User Name", max_length=64)
+  password = forms.CharField(widget=forms.PasswordInput())
+
 class ArticleForm(forms.ModelForm):
   published_date = forms.DateTimeField(widget=forms.SelectDateWidget())
   class Meta:
     model = Article
-    fields = ('title', 'body', 'draft', 'author', 'published_date')
+    fields = ('title', 'body', 'draft', 'published_date')
 
   def clean(self):
     data = super().clean()
