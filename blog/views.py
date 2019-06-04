@@ -7,6 +7,7 @@ from django.views.decorators.http import require_http_methods
 from blog.forms import ArticleForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 def home_page(request):
   current_date = date.today()
@@ -54,7 +55,7 @@ def create_comment(request):
   #   }
   # return render(request, 'article_details', context)
 
-
+@login_required
 def new_article(request):
   if request.method == 'POST':
     form = ArticleForm(request.POST)
@@ -69,6 +70,8 @@ def new_article(request):
   return render(request, 'new_article.html', {'form': form})  
 
 def login_view(request):
+  if request.user.is_authenticated:
+    return redirect('home')
   if request.method == 'POST':
     form = LoginForm(request.POST)
     if form.is_valid():
