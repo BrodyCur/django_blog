@@ -12,6 +12,12 @@ class ArticleForm(forms.ModelForm):
     model = Article
     fields = ('title', 'body', 'draft', 'published_date')
 
+class EditArticleForm(forms.ModelForm):
+  
+  class Meta:
+    model = Article
+    fields = ('title', 'body')
+
   def clean(self):
     data = super().clean()
     body = data.get('body')

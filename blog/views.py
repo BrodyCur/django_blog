@@ -1,10 +1,10 @@
 from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import path
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from datetime import date
 from blog.models import Article, Topic, Comment
 from django.views.decorators.http import require_http_methods
-from blog.forms import ArticleForm, LoginForm
+from blog.forms import ArticleForm, EditArticleForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -68,6 +68,22 @@ def new_article(request):
   else:
     form = ArticleForm()
   return render(request, 'new_article.html', {'form': form})  
+
+@login_required
+def edit_article(request, id):
+  article = get_object_or_404(Article, pk=id, user=request.user.pk)
+  if request.method == 'POST':
+    form = EditArticleForm(request.POST, instance=article)
+    if form.is_valid():
+      form.save()
+      return redirect('article_details', id=article.id)
+  else:
+    form = EditArticleForm(instance=article)
+  context = {
+    'form': form, 
+    'article': article
+  }
+  return render(request, 'edit_article.html', context)
 
 def login_view(request):
   if request.user.is_authenticated:

@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from blog.views import root, home_page, article_page, create_comment, new_article, login_view, logout_view, signup
+from blog.views import root, home_page, article_page, create_comment, new_article, login_view, logout_view, signup, edit_article
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,7 @@ urlpatterns = [
     path('article/<int:id>', article_page, name='article_details'), 
     path('comment/new', create_comment, name='create_comment'),
     path('article/new', new_article, name='new_article'),
+    path('article/<int:id>/edit', edit_article, name='edit_article'),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('signup/', signup, name='signup'),

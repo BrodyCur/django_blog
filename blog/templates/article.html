@@ -9,6 +9,10 @@
   </div>
   <p class="article-body">{{ article.body }}</p>
   
+  {% if request.user == article.user %}
+  <a href="{% url 'edit_article' id=article.pk %}">Edit Article</a>
+  {% endif %}
+
   <div class="comments-wrapper">
     <h5>Comments:</h5>
     <ul>
